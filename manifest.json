@@ -1,15 +1,19 @@
 {
-  "name": "GifurUET",
+  "name": "Gif-UET",
   "version": "1.0",
   "description": "Build an Extension!",
-  "permissions": ["activeTab", "storage", "*://*.facebook.com/*",
-    "*://*.messenger.com/*",
-    "*://*.imgur.com/*",
-    "*://*.gifur.me/*",
-    "https://api.imgur.com/3/album/YL2P1"
+  "permissions": [
+    "storage",
+    "cookies",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "notifications",
+    "*://*.facebook.com/*",
+    "*://*.messenger.com/*"
   ],
   "browser_action": {
-    "default_popup": "popup.html",
+    "default_popup": "index.html",
     "default_icon": {
       "16": "images/giftIcon16.png",
       "32": "images/giftIcon32.png",
@@ -22,6 +26,34 @@
       "48": "images/giftIcon48.png",
       "128": "images/giftIcon128.png"
     }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.facebook.com/*",
+        "*://facebook.com/*",
+        "*://*.messenger.com/*",
+        "*://*.imgur.com/*",
+        "*://ec2-34-207-67-69.compute-1.amazonaws.com:*/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/content.js"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "ids": [
+      "*"
+    ],
+    "matches": [
+      "*://*.facebook.com/*",
+      "*://facebook.com/*",
+      "*://*.messenger.com/*",
+      "*://*.imgur.com/*",
+      "*://ec2-34-207-67-69.compute-1.amazonaws.com:*/*"
+    ],
+    "accepts_tls_channel_id": false
   },
   "manifest_version": 2
 }
