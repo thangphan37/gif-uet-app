@@ -45,12 +45,13 @@
       if (!currentRecieveId || !currentRecieveId.length) {
         return window.alert('Khong co ID nguoi nhan!')
       }
-      const nameImageSend = $(this).data('name')
+      const nameImageSend = $(this).data('name');
+
       $.ajax({
         type: "POST",
         url: "http://ec2-34-207-67-69.compute-1.amazonaws.com:3000/send-message",
         data: {
-          userSendId: "100004030405392",
+          userSendId: "100011442782742",
           userRecievedId: currentRecieveId,
           imageName: nameImageSend
         }

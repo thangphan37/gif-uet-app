@@ -1,4 +1,9 @@
 .image-sticker {
-  width: 45px;
-  height: 45px;
+  width: 35px;
+  height: 35px;
+  transition: transform .2s;
+}
+.image-sticker:hover {
+  cursor: pointer;
+  transform: scale(1.5);
 }
