@@ -24,3 +24,6 @@ body {
   cursor: pointer;
   transform: scale(1.5);
 }
+.tab-title {
+  font-size: 12px;
+}
