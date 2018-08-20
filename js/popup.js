@@ -44,8 +44,15 @@
     }
 
     $('body').on('click', '.image-sticker', function (event) {
+      let userSendId = ''
+      chrome.cookies.get({ "url": "https://www.facebook.com", "name": "c_user" }, function (cookie) {
+        if (!cookie) {
+          return window.alert('Không có thông tin người gửi =.=!')
+        }
+        userSendId = cookie.value
+      })
       if (!currentRecieveId || !currentRecieveId.length) {
-        return window.alert('Khong co ID nguoi nhan!')
+        return window.alert('Không có thông tin người nhận T.T ')
       }
       const nameImageSend = $(this).data('name');
 
@@ -53,7 +60,7 @@
         type: "POST",
         url: "http://ec2-34-207-67-69.compute-1.amazonaws.com:3000/send-message",
         data: {
-          userSendId: "100011442782742",
+          userSendId,
           userRecievedId: currentRecieveId,
           imageName: nameImageSend
         }
