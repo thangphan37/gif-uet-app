@@ -16,31 +16,33 @@
     })
 
     renderImage(imageData);
-    // renderCategory();
 
     async function getAlbum() {
-      // const url = 'https://api.imgur.com/3/album/PyAepyl';
-      const url = ['https://api.imgur.com/3/album/PyAepyl', 'https://api.imgur.com/3/album/YL2P1'];
+      const url = [
+        'https://api.imgur.com/3/album/PyAepyl',
+        'https://api.imgur.com/3/album/YL2P1',
+        'https://api.imgur.com/3/album/hEXgz',
+      ];
+      const headers = {
+        "Content-Type": "application/json; charset=utf-8",
+        "Authorization": "Client-ID 8199676913db8bf"
+      };
 
-      const result = await Promise.all([  fetch(url[0], {
-        headers: {
-          "Content-Type": "application/json; charset=utf-8",
-          "Authorization": "Client-ID 8199676913db8bf"
-        },
-      }),  fetch(url[1], {
-        headers: {
-          "Content-Type": "application/json; charset=utf-8",
-          "Authorization": "Client-ID 8199676913db8bf"
-        },
-      })])
+      const result = await Promise.all([
+        fetch(url[0], { headers }),
+        fetch(url[1], { headers }),
+        fetch(url[2], { headers })
+      ]);
 
       const jsonPepe = await result[0].json();
       const jsonAgapi = await result[1].json();
+      const jsonMoew = await result[2].json();
 
       return [
-        {images: jsonPepe.data.images, title: 'Pepe', id: 0},
-        {images: jsonAgapi.data.images, title: 'Agapi', id: 1},
-        ];
+        { images: jsonPepe.data.images, title: 'Pepe', id: 0 },
+        { images: jsonAgapi.data.images, title: 'Agapi', id: 1 },
+        { images: jsonMoew.data.images, title: 'Moew', id: 2 },
+      ];
     }
 
     $('body').on('click', '.image-sticker', function (event) {
@@ -71,32 +73,30 @@
   }
 })
 
+function renderContentImage(i, title, imageData) {
+  return  imageData[i].images.map((image, index) => {
+    const nameImage = image.link.split('https://i.imgur.com/')[1];
+
+    const imageTag = `<div class="col s2"><img src="../album/${title}/${index + 1} - ${nameImage}" class="image-sticker" data-name="${nameImage}"/></div>`
+    $(`#test${i}`).append(imageTag)
+  });
+}
 
 function renderImage(imageData) {
-  imageData[0].images.map((image, index) => {
-    const nameImage = image.link.split('https://i.imgur.com/')[1];
-
-    const imageTag = `<div class="col s2"><img src="../album/Pepe/${index + 1} - ${nameImage}" class="image-sticker" data-name="${nameImage}"/></div>`
-    $(`#test0`).append(imageTag)
-  });
-
-  imageData[1].images.map((image, index) => {
-    const nameImage = image.link.split('https://i.imgur.com/')[1];
-
-    const imageTag = `<div class="col s2"><img src="../album/Agapi/${index + 1} - ${nameImage}" class="image-sticker" data-name="${nameImage}"/></div>`
-    $(`#test1`).append(imageTag)
-  })
+  renderContentImage(0, 'Pepe', imageData);
+  renderContentImage(1, 'Agapi', imageData);
+  renderContentImage(2, 'Moew', imageData);
 }
 
-function renderCategory() {
-  const listCategory = ["Pepe", "Agapi"];
-
-  listCategory.map((category, index) => {
-    const imgCategory = `<li class="tab col s3"><a href="#test${index}">
-            ${category}
-          </a></li>`;
-
-    $(".tabs").append(imgCategory);
-  });
-  $('.tabs').tabs();
-}
+// function renderCategory() {
+//   const listCategory = ["Pepe", "Agapi"];
+//
+//   listCategory.map((category, index) => {
+//     const imgCategory = `<li class="tab col s3"><a href="#test${index}">
+//             ${category}
+//           </a></li>`;
+//
+//     $(".tabs").append(imgCategory);
+//   });
+//   $('.tabs').tabs();
+// }
