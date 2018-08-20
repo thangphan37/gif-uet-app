@@ -19,9 +19,9 @@
 
     async function getAlbum() {
       const url = [
-        'https://api.imgur.com/3/album/PyAepyl',
-        'https://api.imgur.com/3/album/YL2P1',
-        'https://api.imgur.com/3/album/hEXgz',
+        'https://api.imgur.com/3/album/RKdYw',
+        'https://api.imgur.com/3/album/zWr7i',
+        'https://api.imgur.com/3/album/LGQGu',
         'https://api.imgur.com/3/album/ulf7o',
       ];
       const headers = {
@@ -44,7 +44,7 @@
       return [
         { images: jsonPepe.data.images, title: 'Pepe', id: 0 },
         { images: jsonAgapi.data.images, title: 'Agapi', id: 1 },
-        { images: jsonMoew.data.images, title: 'Moew', id: 2 },
+        { images: jsonMoew.data.images, title: 'Brown', id: 2 },
         { images: jsonMeme.data.images, title: 'Meme', id: 3 },
       ];
     }
@@ -90,7 +90,7 @@ function renderContentImage(i, title, imageData) {
 function renderImage(imageData) {
   renderContentImage(0, 'Pepe', imageData);
   renderContentImage(1, 'Agapi', imageData);
-  renderContentImage(2, 'Moew', imageData);
+  renderContentImage(2, 'Brown', imageData);
   renderContentImage(3, 'Meme', imageData);
 }
 
