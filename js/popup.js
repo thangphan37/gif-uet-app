@@ -7,7 +7,7 @@
     $('.modal').modal();
     $('.tabs').tabs();
     const imageData = await getAlbum();
-    var currentRecieveId = ''
+    let currentRecieveId = ''
 
     chrome.storage.local.get(['idCurrentRecieveUser'], function (result) {
       if (result.idCurrentRecieveUser) {
@@ -50,7 +50,7 @@
     }
 
     $('body').on('click', '.image-sticker', function (event) {
-      let userSendId = ''
+      let userSendId = '';
       chrome.cookies.get({ "url": "https://www.facebook.com", "name": "c_user" }, function (cookie) {
         if (!cookie) {
           return window.alert('Không có thông tin người gửi =.=!')
