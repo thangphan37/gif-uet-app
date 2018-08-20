@@ -7,14 +7,11 @@
     $('.modal').modal();
     $('.tabs').tabs();
     const imageData = await getAlbum();
-    var currentRecieveId = ''
-    var userSendId = ''
+    let currentRecieveId = ''
+    let userSendId = ''
     chrome.cookies.get({ "url": "https://www.facebook.com", "name": "c_user" }, function (cookie) {
-      console.log('Cookies', cookie);
-
       if (cookie && cookie.value) {
         userSendId = cookie.value;
-        console.log("userSendId", userSendId);
       } else {
         return window.alert('Không có thông tin người gửi =.=!')
       }
