@@ -2,7 +2,12 @@
   "name": "Gif-UET",
   "version": "1.0",
   "description": "Build an Extension!",
+  "background": {
+    "scripts": ["js/background.js"],
+    "persistent": true
+  },
   "permissions": [
+    "declarativeContent",
     "storage",
     "cookies",
     "contextMenus",
@@ -12,7 +17,7 @@
     "*://*.facebook.com/*",
     "*://*.messenger.com/*"
   ],
-  "browser_action": {
+  "page_action": {
     "default_popup": "index.html",
     "default_icon": {
       "16": "images/giftUet16.png",
