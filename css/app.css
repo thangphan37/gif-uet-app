@@ -7,3 +7,20 @@
   cursor: pointer;
   transform: scale(1.5);
 }
+body {
+  width: 350px;
+  height: 300px;
+}
+.modal {
+  width: 90%;
+  height: 100%;
+}
+.category1 {
+  width: 45px;
+  height: 45px;
+  transition: transform .2s;
+}
+.category1:hover {
+  cursor: pointer;
+  transform: scale(1.5);
+}
