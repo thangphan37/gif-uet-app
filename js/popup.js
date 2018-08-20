@@ -2,34 +2,24 @@
   cbFn(window.jQuery, window)
 })(function cbFn($, window) {
   $(pageReady)
-  
+
   async function pageReady() {
+    $('.modal').modal();
+    $('.tabs').tabs();
     const imageData = await getAlbum()
     var currentRecieveId = ''
-    // chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-    //   if (request.newID && request.newID !== currentRecieveId) {
-    //     currentRecieveId = request.newID;
-    //     console.log('New mem ', currentRecieveId);
-    //   }
-    // })
+
     chrome.storage.local.get(['idCurrentRecieveUser'], function (result) {
-      if(result.idCurrentRecieveUser){
+      if (result.idCurrentRecieveUser) {
         currentRecieveId = result.idCurrentRecieveUser
       }
     })
 
     renderImage(imageData);
-
-    function renderImage(imageData) {
-      imageData.map(image => {
-        const nameImage = image.link.split('https://i.imgur.com/')[1]
-        const imageTag = `<div class="col s2"><img src="${image.link}" class="image-sticker" data-name="${nameImage}"/></div>`
-        $("#listImage").append(imageTag)
-      })
-    }
+    // renderCategory();
 
     async function getAlbum() {
-      const url = 'https://api.imgur.com/3/album/YL2P1';
+      const url = 'https://api.imgur.com/3/album/PyAepyl';
 
       const result = await fetch(url, {
         headers: {
@@ -38,9 +28,10 @@
         },
       });
       const jsonResult = await result.json();
+
       return jsonResult.data.images;
     }
-    
+
     $('body').on('click', '.image-sticker', function (event) {
       if (!currentRecieveId || !currentRecieveId.length) {
         return window.alert('Khong co ID nguoi nhan!')
@@ -56,11 +47,31 @@
           imageName: nameImageSend
         }
       })
-      .done(console.log)
-      .fail(console.log)
+        .done(console.log)
+        .fail(console.log)
     })
   }
 })
 
 
+function renderImage(imageData) {
+  imageData.map((image, index) => {
+    const nameImage = image.link.split('https://i.imgur.com/')[1];
 
+    const imageTag = `<div class="col s2"><img src="../album/Pepe/${index + 1} - ${nameImage}" class="image-sticker" data-name="${nameImage}"/></div>`
+    $(`#test0`).append(imageTag)
+  })
+}
+
+function renderCategory() {
+  const listCategory = ["Pepe", "Agapi"];
+
+  listCategory.map((category, index) => {
+    const imgCategory = `<li class="tab col s3"><a href="#test${index}">
+            ${category}
+          </a></li>`;
+
+    $(".tabs").append(imgCategory);
+  });
+  $('.tabs').tabs();
+}
