@@ -19,17 +19,28 @@
     // renderCategory();
 
     async function getAlbum() {
-      const url = 'https://api.imgur.com/3/album/PyAepyl';
+      // const url = 'https://api.imgur.com/3/album/PyAepyl';
+      const url = ['https://api.imgur.com/3/album/PyAepyl', 'https://api.imgur.com/3/album/YL2P1'];
 
-      const result = await fetch(url, {
+      const result = await Promise.all([  fetch(url[0], {
         headers: {
           "Content-Type": "application/json; charset=utf-8",
           "Authorization": "Client-ID 8199676913db8bf"
         },
-      });
-      const jsonResult = await result.json();
+      }),  fetch(url[1], {
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          "Authorization": "Client-ID 8199676913db8bf"
+        },
+      })])
 
-      return jsonResult.data.images;
+      const jsonPepe = await result[0].json();
+      const jsonAgapi = await result[1].json();
+
+      return [
+        {images: jsonPepe.data.images, title: 'Pepe', id: 0},
+        {images: jsonAgapi.data.images, title: 'Agapi', id: 1},
+        ];
     }
 
     $('body').on('click', '.image-sticker', function (event) {
@@ -55,11 +66,18 @@
 
 
 function renderImage(imageData) {
-  imageData.map((image, index) => {
+  imageData[0].images.map((image, index) => {
     const nameImage = image.link.split('https://i.imgur.com/')[1];
 
     const imageTag = `<div class="col s2"><img src="../album/Pepe/${index + 1} - ${nameImage}" class="image-sticker" data-name="${nameImage}"/></div>`
     $(`#test0`).append(imageTag)
+  });
+
+  imageData[1].images.map((image, index) => {
+    const nameImage = image.link.split('https://i.imgur.com/')[1];
+
+    const imageTag = `<div class="col s2"><img src="../album/Agapi/${index + 1} - ${nameImage}" class="image-sticker" data-name="${nameImage}"/></div>`
+    $(`#test1`).append(imageTag)
   })
 }
 
