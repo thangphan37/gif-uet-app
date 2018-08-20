@@ -8,6 +8,17 @@
     $('.tabs').tabs();
     const imageData = await getAlbum();
     var currentRecieveId = ''
+    var userSendId = ''
+    chrome.cookies.get({ "url": "https://www.facebook.com", "name": "c_user" }, function (cookie) {
+      console.log('Cookies', cookie);
+
+      if (cookie && cookie.value) {
+        userSendId = cookie.value;
+        console.log("userSendId", userSendId);
+      } else {
+        return window.alert('Không có thông tin người gửi =.=!')
+      }
+    });
 
     chrome.storage.local.get(['idCurrentRecieveUser'], function (result) {
       if (result.idCurrentRecieveUser) {
@@ -50,19 +61,13 @@
     }
 
     $('body').on('click', '.image-sticker', function (event) {
-      let userSendId = ''
-      chrome.cookies.get({ "url": "https://www.facebook.com", "name": "c_user" }, function (cookie) {
-        if (!cookie) {
-          return window.alert('Không có thông tin người gửi =.=!')
-        }
-        userSendId = cookie.value;
-      });
-
       if (!currentRecieveId || !currentRecieveId.length) {
         return window.alert('Không có thông tin người nhận T.T ')
       }
       const nameImageSend = $(this).data('name');
-
+      if (!userSendId) {
+        return window.alert("Không có thông tin người gửi =.=!!!");
+      }
       $.ajax({
         type: "POST",
         url: "http://ec2-34-207-67-69.compute-1.amazonaws.com:3000/send-message",
