@@ -5,9 +5,10 @@
 
   async function pageReady() {
     $('.modal').modal()
-    $('.tabs').tabs()
+    $('.tabs').tabs({
+    })
     $('img.image-sticker').lazyload()
-    const imageData = await getAlbum()
+    // const imageData = await getAlbum()
     let currentRecieveId = ''
     let userSendId = ''
     chrome.cookies.get({ "url": "https://www.facebook.com", "name": "c_user" }, function (cookie) {
@@ -22,9 +23,9 @@
       if (result.idCurrentRecieveUser) {
         currentRecieveId = result.idCurrentRecieveUser
       }
-    });
+    })
 
-    renderImage(imageData)
+    // renderImage(imageData)
 
     async function getAlbum() {
       const url = [
@@ -68,15 +69,15 @@
 
     $('body').on('click', '.image-sticker', function (event) {
       if (!currentRecieveId || !currentRecieveId.length) {
-        return window.alert('Không có thông tin người nhận T.T ')
+        return window.alert('Khong co thong tin nguoi nhan T.T ')
       }
       const nameImageSend = $(this).data('name');
       if (!userSendId) {
-        return window.alert("Không có thông tin người gửi =.=!!!");
+        return window.alert("Khong co thong tin nguoi gui =.=!!!");
       }
       $.ajax({
         type: "POST",
-        url: "http://ec2-34-207-67-69.compute-1.amazonaws.com:3000/send-message",
+        url: "https://thidaihoc.online/send-message",
         data: {
           userSendId,
           userRecievedId: currentRecieveId,
