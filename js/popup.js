@@ -1,12 +1,13 @@
 (function (cbFn) {
   cbFn(window.jQuery, window)
 })(function cbFn($, window) {
-  $(pageReady);
+  $(pageReady)
 
   async function pageReady() {
-    $('.modal').modal();
-    $('.tabs').tabs();
-    const imageData = await getAlbum();
+    $('.modal').modal()
+    $('.tabs').tabs()
+    $('img.image-sticker').lazyload()
+    const imageData = await getAlbum()
     let currentRecieveId = ''
     let userSendId = ''
     chrome.cookies.get({ "url": "https://www.facebook.com", "name": "c_user" }, function (cookie) {
@@ -23,7 +24,7 @@
       }
     });
 
-    renderImage(imageData);
+    renderImage(imageData)
 
     async function getAlbum() {
       const url = [
@@ -31,6 +32,8 @@
         'https://api.imgur.com/3/album/zWr7i',
         'https://api.imgur.com/3/album/LGQGu',
         'https://api.imgur.com/3/album/ulf7o',
+        'https://api.imgur.com/3/album/0LEvazq',
+        'https://api.imgur.com/3/album/eRCCtp1',
       ];
       const headers = {
         "Content-Type": "application/json; charset=utf-8",
@@ -41,19 +44,25 @@
         fetch(url[0], { headers }),
         fetch(url[1], { headers }),
         fetch(url[2], { headers }),
-        fetch(url[3], { headers })
-      ]);
+        fetch(url[3], { headers }),
+        fetch(url[4], { headers }),
+        fetch(url[5], { headers })
+      ])
 
-      const jsonPepe = await result[0].json();
-      const jsonAgapi = await result[1].json();
-      const jsonMoew = await result[2].json();
-      const jsonMeme = await result[3].json();
-
+      const jsonPepe = await result[0].json()
+      const jsonAgapi = await result[1].json()
+      const jsonMoew = await result[2].json()
+      const jsonMeme = await result[3].json()
+      const jsonVoz = await result[4].json()
+      const jsonAmi = await result[5].json()
+      
       return [
-        { images: jsonPepe.data.images, title: 'Pepe', id: 0 },
+        { images: jsonPepe.data.images,  title: 'Pepe',  id: 0 },
         { images: jsonAgapi.data.images, title: 'Agapi', id: 1 },
-        { images: jsonMoew.data.images, title: 'Brown', id: 2 },
-        { images: jsonMeme.data.images, title: 'Meme', id: 3 },
+        { images: jsonMoew.data.images,  title: 'Brown', id: 2 },
+        { images: jsonMeme.data.images,  title: 'Meme',  id: 3 },
+        { images: jsonVoz.data.images,   title: 'Voz',   id: 4 },
+        { images: jsonAmi.data.images,   title: 'Ami',   id: 5 }
       ];
     }
 
@@ -90,21 +99,10 @@ function renderContentImage(i, title, imageData) {
 }
 
 function renderImage(imageData) {
-  renderContentImage(0, 'Pepe', imageData);
-  renderContentImage(1, 'Agapi', imageData);
-  renderContentImage(2, 'Brown', imageData);
-  renderContentImage(3, 'Meme', imageData);
+  // renderContentImage(0, 'Pepe', imageData);
+  renderContentImage(1, 'Agapi', imageData)
+  renderContentImage(2, 'Brown', imageData)
+  renderContentImage(3, 'Meme', imageData)
+  renderContentImage(4, 'Voz', imageData)
+  renderContentImage(5, 'Ami', imageData)
 }
-
-// function renderCategory() {
-//   const listCategory = ["Pepe", "Agapi"];
-//
-//   listCategory.map((category, index) => {
-//     const imgCategory = `<li class="tab col s3"><a href="#test${index}">
-//             ${category}
-//           </a></li>`;
-//
-//     $(".tabs").append(imgCategory);
-//   });
-//   $('.tabs').tabs();
-// }

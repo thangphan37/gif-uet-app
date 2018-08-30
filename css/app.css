@@ -1,6 +1,6 @@
 .image-sticker {
-  width: 35px;
-  height: 35px;
+  width: 45px;
+  height: 45px;
   transition: transform .2s;
 }
 .image-sticker:hover {
