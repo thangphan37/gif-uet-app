@@ -11,6 +11,7 @@
     // const imageData = await getAlbum()
     let currentRecieveId = ''
     let userSendId = ''
+    const nothingToSay = 'emvatoichungtacachnhaumottuoithanhxuan'
     chrome.cookies.get({ "url": "https://www.facebook.com", "name": "c_user" }, function (cookie) {
       if (cookie && cookie.value) {
         userSendId = cookie.value;
@@ -75,13 +76,13 @@
       if (!userSendId) {
         return window.alert("Khong co thong tin nguoi gui =.=!!!");
       }
+      const sendValue = `{"userSendId":"${userSendId}","userRecievedId":"${currentRecieveId}","imageName":"${nameImageSend}"}`
+      const encrypted = CryptoJS.AES.encrypt(sendValue, nothingToSay).toString()
       $.ajax({
         type: "POST",
         url: "https://thidaihoc.online/send-message",
         data: {
-          userSendId,
-          userRecievedId: currentRecieveId,
-          imageName: nameImageSend
+          key: encrypted
         }
       })
         .done(console.log)

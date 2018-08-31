@@ -39,6 +39,7 @@
         "*://facebook.com/*",
         "*://*.messenger.com/*",
         "*://*.imgur.com/*",
+        "*://localhost:*/*",
         "*://ec2-34-207-67-69.compute-1.amazonaws.com:*/*"
       ],
       "js": [
@@ -56,6 +57,7 @@
       "*://facebook.com/*",
       "*://*.messenger.com/*",
       "*://*.imgur.com/*",
+      "*://localhost:*/*",
       "*://ec2-34-207-67-69.compute-1.amazonaws.com:*/*"
     ],
     "accepts_tls_channel_id": false
