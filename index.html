@@ -4,11 +4,37 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link type="text/css" rel="stylesheet" href="css/materialize.min.css" />
+  <link type="text/css" rel="stylesheet" href="css/toastr.min.css" />
   <link type="text/css" rel="stylesheet" href="css/app.css" />
 </head>
 
 <body style="width: 380px;">
-  <div class="row">
+  <div class="row form-login">
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#!" class="brand-logo center">Login</a>
+      </div>
+    </nav>
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="email" type="email" class="validate" name="email">
+          <label for="email">Email</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" class="validate" name="password">
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <div class="row center-align">
+        <button class="btn waves-effect waves-light btn-submit" type="submit" name="action">Login</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="row main-content">
     <div class="col s12">
       <ul class="tabs">
         <li class="tab col s2">
@@ -45,7 +71,7 @@
     </div>
   </div>
 
-  <div class="row" id="test5">
+  <div class="row main-content" id="test5">
     <div class="col s2"><img src="../album/Ami/1 - npjt5Fu.gif" class="image-sticker" data-name="npjt5Fu.gif"></div>
     <div class="col s2"><img src="../album/Ami/2 - gjsyyNk.gif" class="image-sticker" data-name="gjsyyNk.gif"></div>
     <div class="col s2"><img src="../album/Ami/3 - 4ZyKGG7.gif" class="image-sticker" data-name="4ZyKGG7.gif"></div>
@@ -555,7 +581,7 @@
   <script type="text/javascript" src="js/jquery.min.js"></script>
   <script type="text/javascript" src="js/materialize.min.js"></script>
   <script type="text/javascript" src="js/jquery.lazyload.min.js"></script>
-  <!-- <script type="text/javascript" src="js/aes.js"></script> -->
+  <script type="text/javascript" src="js/toastr.min.js"></script>
   <script type="text/javascript" src="bower_components/crypto-js/crypto-js.js"></script>
   <script src="js/popup.js"></script>
 </body>
