@@ -5,7 +5,6 @@ chrome.storage.local.set({ idCurrentRecieveUser }, function () {
 
 $('body').on('click', function (event) {
   var $currentTarget = $(event.target)
-  console.log('Class',$currentTarget.attr('class'))
   if($currentTarget.hasClass('_1mf') && $currentTarget.hasClass('_1mj')) {
     
     var listClass = $currentTarget.closest('._5qi9._5qib').find('._3_9e._s0f').attr('class').split(' ')

@@ -15,6 +15,7 @@
     "webRequestBlocking",
     "notifications",
     "*://*.facebook.com/*",
+    "*://thidaihoc.online/*",
     "*://*.messenger.com/*"
   ],
   "page_action": {
@@ -39,6 +40,8 @@
         "*://facebook.com/*",
         "*://*.messenger.com/*",
         "*://*.imgur.com/*",
+        "*://thidaihoc.online/*",
+        "*://localhost:*/*",
         "*://ec2-34-207-67-69.compute-1.amazonaws.com:*/*"
       ],
       "js": [
@@ -56,6 +59,8 @@
       "*://facebook.com/*",
       "*://*.messenger.com/*",
       "*://*.imgur.com/*",
+      "*://thidaihoc.online/*",
+      "*://localhost:*/*",
       "*://ec2-34-207-67-69.compute-1.amazonaws.com:*/*"
     ],
     "accepts_tls_channel_id": false

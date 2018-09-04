@@ -1,6 +1,6 @@
 chrome.runtime.onInstalled.addListener(function () {
   chrome.storage.sync.set({ color: '#3aa757' }, function () {
-    console.log('The color is green.');
+    console.log('The color is green.')
   });
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
     chrome.declarativeContent.onPageChanged.addRules([{
@@ -16,3 +16,10 @@ chrome.runtime.onInstalled.addListener(function () {
     }]);
   });
 });
+
+chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
+  if (changeInfo.status == 'complete') {
+    console.log('asdfasdfasdfasdfasdf')
+  }
+})
+
